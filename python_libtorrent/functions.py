@@ -30,7 +30,7 @@ class DownloaderClass():
                 xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,text,750,__icon__))
 
 def log(msg):
-    xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGINFO )
+    xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGNOTICE )
     #print "### [%s]: %s" % (__scriptname__,msg,)
 
 def get_libname(platform):
