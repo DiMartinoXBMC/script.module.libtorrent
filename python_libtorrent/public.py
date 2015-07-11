@@ -6,16 +6,7 @@
 
 import os
 
-#UPDATE IT FROM functions
-def get_libname(platform):
-    libname=[]
-    if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64']:
-        libname=['libtorrent.so']
-    elif platform['system'] == 'windows':
-        libname=['libtorrent.pyd']
-    elif platform['system'] == 'android_armv7':
-        libname=['libtorrent.so', 'liblibtorrent.so']
-    return libname
+from platform_pulsar import get_libname
 
 class Public:
     def __init__( self ):
