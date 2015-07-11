@@ -7,6 +7,8 @@ script.module.libtorrent is a Kodi module that makes easy import of python-libto
 Usage
 ==================
 
+S1mple as that
+
 #. Add module in requires of your addon.xml:
 
  * <import addon="script.module.libtorrent"/>
