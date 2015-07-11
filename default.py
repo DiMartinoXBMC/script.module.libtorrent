@@ -1,40 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import xbmcplugin, xbmcgui, os
-from python_libtorrent.platform_pulsar import get_platform
-from ctypes import *
+from python_libtorrent import get_libtorrent, get_platform, log
+import xbmcgui
 
 sucsess=False
-dialog = xbmcgui.Dialog()
+version=''
 p=get_platform()
-ROOT_PATH=os.path.dirname(__file__)
-dirname=os.path.join(ROOT_PATH, 'python_libtorrent', p['system'])
-#dirname = os.path.join(xbmc.translatePath('special://home'), 'addons', 'script.module.libtorrent',
-#                       'python_libtorrent', platform['system'])
-#sys.path.insert(0, dirname)
+dialog = xbmcgui.Dialog()
 
 try:
-    import python_libtorrent as libtorrent
+    libtorrent=get_libtorrent()
 
-    print '[script.module.libtorrent]: Imported libtorrent v' + libtorrent.version + ' from python_libtorrent'
+    log('Imported libtorrent v' + libtorrent.version + ' from get_libtorrent()')
+    version=str(libtorrent.version)
     sucsess=True
 except Exception, e:
-    print '[script.module.libtorrent]: Error importing from system. Exception: ' + str(e)
-
-try:
-    cdll.LoadLibrary(dirname + '/libpython2.6.so')
-except Exception, e:
-    print '[script.module.libtorrent]: Error importing from '+str(dirname)+'. Exception: ' + str(e)
-	
-try:
-    cdll.LoadLibrary(dirname + '/libpython2.6.so')
-    cdll.LoadLibrary(dirname + '/libtorrent.so')
-
-    print '[script.module.libtorrent]: Imported libtorrent v' + libtorrent.version + ' from cdll'
-    sucsess=True
-except Exception, e:
-    print '[script.module.libtorrent]: Error importing from '+str(dirname)+'. Exception: ' + str(e)
+    log('Error importing from get_libtorrent(). Exception: ' + str(e))
 
 
-line2='WE DID IT! IMPORTED' if sucsess else 'Failed!'
+line2='Python-libtorrent %s IMPORTED successfully' % version if sucsess else 'Failed to import python-libtorrent!'
 dialog.ok('Libtorrent','OS:'+p['os']+' arch:'+p['arch'], line2)

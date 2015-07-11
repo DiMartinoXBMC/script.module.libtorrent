@@ -20,7 +20,7 @@ dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.m
 #dirname = os.path.join(xbmc.translatePath('special://home'), 'addons', 'script.module.libtorrent',
 #                       'python_libtorrent')
 dest_path = os.path.join(dirname, platform['system'])
-sys.path.insert(0, dirname)
+sys.path.insert(0, dest_path)
 
 lm=LibraryManager(dest_path)
 if not lm.check_exist():
@@ -33,14 +33,8 @@ if __settings__.getSetting('plugin_name')!=__plugin__:
 
 log('platform ' + str(platform))
 try:
-    if platform['system'] == 'darwin':
-        from darwin import libtorrent
-    elif platform['system'] == 'linux_x86':
-        from linux_x86 import libtorrent
-    elif platform['system'] == 'linux_x86_64':
-        from linux_x86_64 import libtorrent
-    elif platform['system'] == 'windows':
-        from windows import libtorrent
+    if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64', 'windows']:
+        import libtorrent
     elif platform['system'] == 'android' and platform['arch'] == 'arm':
         import imp
         from ctypes import *
@@ -48,20 +42,19 @@ try:
         dll_path=os.path.join(dest_path, 'liblibtorrent.so')
         print "CDLL path = " + dll_path
         liblibtorrent=CDLL(dll_path)
-        print 'CDLL = ' + str(liblibtorrent)
+        log('CDLL = ' + str(liblibtorrent))
 
         path_list = [dest_path]
-        print 'path_list = ' + str(path_list)
+        log('path_list = ' + str(path_list))
         fp, pathname, description = imp.find_module('libtorrent', path_list)
-        print 'fp = ' + str(fp)
-        print 'pathname = ' + str(pathname)
+        log('fp = ' + str(fp))
+        log('pathname = ' + str(pathname))
         libtorrent = imp.load_module('libtorrent', fp, pathname, description)
 
-    print '[script.module.libtorrent]: Imported libtorrent v' + libtorrent.version + ' from python_libtorrent.' + platform[
-        'system']
+    log('Imported libtorrent v' + libtorrent.version + ' from ' + dest_path)
 
 except Exception, e:
-    print '[script.module.libtorrent]: Error importing python_libtorrent.' + platform['system'] + '. Exception: ' + str(e)
+    log('Error importing libtorrent from' + dest_path + '. Exception: ' + str(e))
     pass
 
 def get_libtorrent():

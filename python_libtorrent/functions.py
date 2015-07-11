@@ -1,8 +1,7 @@
 import sys
 import os
 import xbmc, xbmcgui, xbmcvfs
-import urllib
-
+from net import HTTP
 
 __libbaseurl__ = "https://github.com/DiMartinoXBMC/script.module.libtorrent/raw/master/python_libtorrent/"
 __scriptname__ = "script.module.libtorrent"
@@ -15,37 +14,20 @@ class DownloaderClass():
         self.platform = get_platform()
         tempdir(self.platform)
 
-    def download(self, url, dest):
-        self.dp = xbmcgui.DialogProgress()
-        self.dp.create("script.module.libtorrent","Downloading File", url)
-        urllib.urlretrieve(url, dest, lambda nb, bs, fs, url= url: self._pbhook(nb,bs,fs))
-
-    def _pbhook(self, numblocks, blocksize, filesize):
-        try:
-            percent = min((numblocks*blocksize*100)/filesize, 100)
-            self.dp.update(percent)
-        except:
-            percent = 100
-            self.dp.update(percent)
-            log("libtorrent: DOWNLOAD FAILED")
-        if self.dp.iscanceled():
-            log("libtorrent: DOWNLOAD CANCELLED")
-        self.dp.close()
-
     def tools_download(self):
-        log("libtorrent: try to fetch libtorrent.so")
         for libname in get_libname(self.platform):
-            url = "%s/%s/%s.zip" % (__libbaseurl__, self.platform, libname)
+            log("try to fetch %s" % libname)
+            url = "%s/%s/%s.zip" % (__libbaseurl__, self.platform['system'], libname)
             dest = os.path.join(self.dest_path, libname)
             try:
-                self.download(url, dest + ".zip")
+                self.http = HTTP()
+                self.http.fetch(url, download=dest + ".zip", progress=True)
                 log("%s -> %s" % (url, dest))
                 xbmc.executebuiltin('XBMC.Extract("%s.zip","%s")' % (dest, self.dest_path), True)
                 xbmcvfs.delete(dest + ".zip")
             except:
                 text = 'Failed!'
                 xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,text,750,__icon__))
-
 
 def log(msg):
     xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGINFO )
