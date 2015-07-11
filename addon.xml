@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<addon id='script.module.libtorrent' version='0.6.19' name='LibTorrent' provider-name='DiMartino'>
+<addon id='script.module.libtorrent' version='0.6.19b' name='LibTorrent' provider-name='DiMartino'>
   <requires>
     <import addon='xbmc.python' version='2.1.0'/>
   </requires>
-  <extension point="xbmc.python.script" library="__init__.py">
+  <extension point="xbmc.python.script" library="default.py">
     <provides>executable</provides>
   </extension>
   <extension point='xbmc.addon.metadata'>
     <platform>all</platform>
     <summary>LibTorrent</summary>
   </extension>
-  <extension library="default.py" point="xbmc.service" />
   <extension point='xbmc.python.module'/>
 </addon>
