@@ -12,8 +12,8 @@ import os
 __settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
 __version__ = __settings__.getAddonInfo('version')
 __plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
-__root__ = __settings__.getAddonInfo('path')
 
+libtorrent=None
 platform = get_platform()
 dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.module.libtorrent',
                        'python_libtorrent')
@@ -24,7 +24,8 @@ sys.path.insert(0, dest_path)
 
 lm=LibraryManager(dest_path)
 if not lm.check_exist():
-    DownloaderClass(dest_path).tools_download()
+    ok=lm.download()
+    xbmc.sleep(2000)
 
 
 if __settings__.getSetting('plugin_name')!=__plugin__:
@@ -35,7 +36,7 @@ log('platform ' + str(platform))
 try:
     if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64', 'windows']:
         import libtorrent
-    elif platform['system'] == 'android' and platform['arch'] == 'arm':
+    elif platform['system'] == 'android_armv7':
         import imp
         from ctypes import *
 

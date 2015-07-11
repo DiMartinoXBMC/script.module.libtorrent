@@ -1,2 +1,6 @@
-﻿0.6.10b:
+﻿0.6.19b:
+Added windows 0.16.19, OS X 0.16.19, Android ARM 0.16.19
+Automatic download system
+
+0.6.10b:
 Windows update to 0.6.18

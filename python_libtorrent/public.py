@@ -6,28 +6,24 @@
 
 import os
 
+#UPDATE IT FROM functions
 def get_libname(platform):
     libname=[]
-    if platform['system'] == 'darwin':
-        libname=['libtorrent.so']
-    elif platform['system'] == 'linux_x86':
-        libname=['libtorrent.so']
-    elif platform['system'] == 'linux_x86_64':
+    if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
-    elif platform['system'] == 'android' and platform['arch'] == 'arm':
+    elif platform['system'] == 'android_armv7':
         libname=['libtorrent.so', 'liblibtorrent.so']
     return libname
 
 class Public:
     def __init__( self ):
-        # generate file
         self.platforms=[{'system':'darwin'},
                         {'system':'linux_x86'},
                         {'system':'linux_x86_64'},
                         {'system':'windows'},
-                        {'system':'android', 'arch':'arm'}]
+                        {'system':'android_armv7'}]
         self.root=os.path.dirname(__file__)
         self._generate_size_file()
 
@@ -71,4 +67,5 @@ class Public:
 
 if ( __name__ == "__main__" ):
     # start
+    #TODO: publicate
     Public()
