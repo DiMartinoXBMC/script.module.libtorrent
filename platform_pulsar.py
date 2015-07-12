@@ -69,7 +69,7 @@ def get_platform():
         else:
             ret["system"] = 'android_x86'
         ret["message"] = ['Please contact DiMartino on kodi.tv forum. We compiled python-libtorrent for Android,',
-                          'but we need your help with some tests on diffrient processeors.']
+                          'but we need your help with some tests on different processors.']
     elif ret["os"] == "darwin":
         ret["system"] = 'darwin'
         ret["message"] = ['It is possible to compile python-libtorrent for OS X.',

@@ -34,7 +34,7 @@ class DownloaderClass():
                     text = 'Failed download %s!' % libname
                     xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,text,750,__icon__))
             else:
-                x=xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so', dest))
+                x=xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so'), dest)
         return True
 
 def log(msg):

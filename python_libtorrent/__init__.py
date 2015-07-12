@@ -17,8 +17,6 @@ libtorrent=None
 platform = get_platform()
 dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.module.libtorrent',
                        'python_libtorrent')
-#dirname = os.path.join(xbmc.translatePath('special://home'), 'addons', 'script.module.libtorrent',
-#                       'python_libtorrent')
 dest_path = os.path.join(dirname, platform['system'])
 sys.path.insert(0, dest_path)
 
@@ -50,7 +48,10 @@ try:
         fp, pathname, description = imp.find_module('libtorrent', path_list)
         log('fp = ' + str(fp))
         log('pathname = ' + str(pathname))
-        libtorrent = imp.load_module('libtorrent', fp, pathname, description)
+        try:
+            libtorrent = imp.load_module('libtorrent', fp, pathname, description)
+        finally:
+            if fp: fp.close()
 
     log('Imported libtorrent v' + libtorrent.version + ' from ' + dest_path)
 
