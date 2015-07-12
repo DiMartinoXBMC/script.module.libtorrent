@@ -14,7 +14,8 @@ class Public:
                         {'system':'linux_x86'},
                         {'system':'linux_x86_64'},
                         {'system':'windows'},
-                        {'system':'android_armv7'}]
+                        {'system':'android_armv7'},
+                        {'system':'android_x86'}]
         self.root=os.path.dirname(__file__)
         self._generate_size_file()
 

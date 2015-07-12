@@ -17,7 +17,7 @@ def get_libname(platform):
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
-    elif platform['system'] == 'android_armv7':
+    elif platform['system'] in ['android_armv7','android_x86']:
         libname=['libtorrent.so', 'liblibtorrent.so']
     return libname
 
