@@ -10,13 +10,11 @@ from platform_pulsar import get_libname
 
 class Public:
     def __init__( self ):
-        self.platforms=[{'system':'darwin'},
-                        {'system':'linux_x86'},
-                        {'system':'linux_x86_64'},
-                        {'system':'windows'},
-                        {'system':'android_armv7'},
-                        {'system':'android_x86'}]
+        self.platforms=[]
         self.root=os.path.dirname(__file__)
+        for dir in os.listdir(self.root):
+            if os.path.isdir(os.path.join(self.root,dir)):
+                self.platforms.append({'system':dir})
         self._generate_size_file()
 
     def _generate_size_file( self ):

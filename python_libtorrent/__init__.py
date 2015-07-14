@@ -34,6 +34,10 @@ log('platform ' + str(platform))
 try:
     if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64', 'windows']:
         import libtorrent
+    elif platform['system'] in ['linux_arm']:
+        from ctypes import *
+        cdll.LoadLibrary(dirname + '/libtorrent-rasterbar.so.7')
+        import libtorrent
     elif platform['system'] in ['android_armv7', 'android_x86']:
         import imp
         from ctypes import *
