@@ -32,9 +32,9 @@ if __settings__.getSetting('plugin_name')!=__plugin__:
 
 log('platform ' + str(platform))
 try:
-    if platform['system'] in ['darwin', 'linux_x86', 'linux_x86_64', 'windows']:
+    if platform['system'] in ['darwin', 'linux_x86', 'windows']:
         import libtorrent
-    elif platform['system'] in ['linux_arm']:
+    elif platform['system'] in ['linux_x86_64']:
         from ctypes import *
         dll_path=os.path.join(dest_path, 'libtorrent-rasterbar.so.7')
         log('CDLL path = ' + dll_path)
