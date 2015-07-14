@@ -36,14 +36,17 @@ try:
         import libtorrent
     elif platform['system'] in ['linux_arm']:
         from ctypes import *
-        cdll.LoadLibrary(dirname + '/libtorrent-rasterbar.so.7')
+        dll_path=os.path.join(dest_path, 'libtorrent-rasterbar.so.7')
+        log('CDLL path = ' + dll_path)
+        liblibtorrent=CDLL(dll_path)
+        log('CDLL = ' + str(liblibtorrent))
         import libtorrent
     elif platform['system'] in ['android_armv7', 'android_x86']:
         import imp
         from ctypes import *
 
         dll_path=os.path.join(dest_path, 'liblibtorrent.so')
-        print "CDLL path = " + dll_path
+        log('CDLL path = ' + dll_path)
         liblibtorrent=CDLL(dll_path)
         log('CDLL = ' + str(liblibtorrent))
 
