@@ -3,7 +3,7 @@ import os
 import xbmc, xbmcgui, xbmcvfs
 from net import HTTP
 
-__libbaseurl__ = "https://github.com/DiMartinoXBMC/script.module.libtorrent/raw/master/python_libtorrent/"
+__libbaseurl__ = "https://github.com/DiMartinoXBMC/script.module.libtorrent/raw/master/python_libtorrent"
 __scriptname__ = "script.module.libtorrent"
 __icon__=os.path.join(xbmc.translatePath('special://home'), 'addons',
                                    'script.module.libtorrent', 'icon.png')
