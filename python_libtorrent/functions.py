@@ -38,8 +38,12 @@ class DownloaderClass():
         return True
 
 def log(msg):
-    xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGNOTICE )
-    #print "### [%s]: %s" % (__scriptname__,msg,)
+    try:
+        xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGNOTICE )
+    except UnicodeEncodeError:
+        xbmc.log("### [%s]: %s" % (__scriptname__,msg.encode("utf-8", "ignore"),), level=xbmc.LOGNOTICE )
+    except:
+        xbmc.log("### [%s]: %s" % (__scriptname__,'ERROR LOG',), level=xbmc.LOGNOTICE )
 
 def tempdir(platform):
     dirname=xbmc.translatePath('special://temp')
