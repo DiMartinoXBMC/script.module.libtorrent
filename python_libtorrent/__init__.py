@@ -38,21 +38,30 @@ try:
     if platform['system'] in ['linux_x86', 'windows']:
         import libtorrent
     elif platform['system'] in ['darwin']:
-        from darwin import *
+        import imp
+        path_list = [dest_path]
+        log('path_list = ' + str(path_list))
+        fp, pathname, description = imp.find_module('libtorrent', path_list)
+        log('fp = ' + str(fp))
+        log('pathname = ' + str(pathname))
+        try:
+            libtorrent = imp.load_module('libtorrent', fp, pathname, description)
+        finally:
+            if fp: fp.close()
     elif platform['system'] in ['linux_x86_64', 'linux_arm']:
-        from ctypes import *
+        from ctypes import cdll
         dll_path=os.path.join(dest_path, 'libtorrent-rasterbar.so.7')
         log('CDLL path = ' + dll_path)
-        liblibtorrent=CDLL(dll_path)
+        liblibtorrent=cdll(dll_path)
         log('CDLL = ' + str(liblibtorrent))
         import libtorrent
     elif platform['system'] in ['android_armv7', 'android_x86']:
         import imp
-        from ctypes import *
+        from ctypes import cdll
 
         dll_path=os.path.join(dest_path, 'liblibtorrent.so')
         log('CDLL path = ' + dll_path)
-        liblibtorrent=CDLL(dll_path)
+        liblibtorrent=cdll(dll_path)
         log('CDLL = ' + str(liblibtorrent))
 
         path_list = [dest_path]
