@@ -5,7 +5,7 @@
 '''
 
 from functions import *
-import xbmc, xbmcgui, xbmcvfs, xbmcaddon
+import xbmc, xbmcaddon
 import sys
 import os
 
@@ -49,7 +49,7 @@ try:
         finally:
             if fp: fp.close()
     elif platform['system'] in ['linux_x86_64', 'linux_arm']:
-        from ctypes import cdll
+        from ctypes import *
         dll_path=os.path.join(dest_path, 'libtorrent-rasterbar.so.7')
         log('CDLL path = ' + dll_path)
         liblibtorrent=cdll(dll_path)
@@ -57,7 +57,7 @@ try:
         import libtorrent
     elif platform['system'] in ['android_armv7', 'android_x86']:
         import imp
-        from ctypes import cdll
+        from ctypes import *
 
         dll_path=os.path.join(dest_path, 'liblibtorrent.so')
         log('CDLL path = ' + dll_path)
