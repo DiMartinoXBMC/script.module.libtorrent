@@ -1,10 +1,12 @@
 #import sys
 import os
-import xbmc, xbmcgui, xbmcvfs
+import xbmc, xbmcgui, xbmcvfs, xbmcaddon
 from net import HTTP
 
 __libbaseurl__ = "https://github.com/DiMartinoXBMC/script.module.libtorrent/raw/master/python_libtorrent"
-__scriptname__ = "script.module.libtorrent"
+__settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
+__version__ = __settings__.getAddonInfo('version')
+__plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
 __icon__=os.path.join(xbmc.translatePath('special://home'), 'addons',
                                    'script.module.libtorrent', 'icon.png')
 #dirname = os.path.join(xbmc.translatePath('special://home'), 'addons', 'script.module.libtorrent')
@@ -32,18 +34,18 @@ class DownloaderClass():
                     xbmcvfs.delete(dest + ".zip")
                 except:
                     text = 'Failed download %s!' % libname
-                    xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,text,750,__icon__))
+                    xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__plugin__,text,750,__icon__))
             else:
                 x=xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so'), dest)
         return True
 
 def log(msg):
     try:
-        xbmc.log("### [%s]: %s" % (__scriptname__,msg,), level=xbmc.LOGNOTICE )
+        xbmc.log("### [%s]: %s" % (__plugin__,msg,), level=xbmc.LOGNOTICE )
     except UnicodeEncodeError:
-        xbmc.log("### [%s]: %s" % (__scriptname__,msg.encode("utf-8", "ignore"),), level=xbmc.LOGNOTICE )
+        xbmc.log("### [%s]: %s" % (__plugin__,msg.encode("utf-8", "ignore"),), level=xbmc.LOGNOTICE )
     except:
-        xbmc.log("### [%s]: %s" % (__scriptname__,'ERROR LOG',), level=xbmc.LOGNOTICE )
+        xbmc.log("### [%s]: %s" % (__plugin__,'ERROR LOG',), level=xbmc.LOGNOTICE )
 
 def tempdir(platform):
     dirname=xbmc.translatePath('special://temp')
