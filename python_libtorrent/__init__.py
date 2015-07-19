@@ -35,7 +35,7 @@ if platform['system'] not in ['windows']:
     log('os: '+str(os.uname()))
 
 try:
-    if platform['system'] in ['linux_x86', 'windows']:
+    if platform['system'] in ['linux_x86', 'windows', 'linux_arm']:
         import libtorrent
     elif platform['system'] in ['darwin']:
         import imp
@@ -48,7 +48,7 @@ try:
             libtorrent = imp.load_module('libtorrent', fp, pathname, description)
         finally:
             if fp: fp.close()
-    elif platform['system'] in ['linux_x86_64', 'linux_arm']:
+    elif platform['system'] in ['linux_x86_64']:
         from ctypes import CDLL
         dll_path=os.path.join(dest_path, 'libtorrent-rasterbar.so.7')
         log('CDLL path = ' + dll_path)

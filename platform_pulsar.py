@@ -13,11 +13,11 @@ except:
 
 def get_libname(platform):
     libname=[]
-    if platform['system'] in ['darwin', 'linux_x86']:
+    if platform['system'] in ['darwin', 'linux_x86', 'linux_arm']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
-    elif platform['system'] in ['linux_arm', 'linux_x86_64']:
+    elif platform['system'] in ['linux_x86_64']:
         libname=['libtorrent.so', 'libtorrent-rasterbar.so.7']
     elif platform['system'] in ['android_armv7', 'android_x86']:
         libname=['libtorrent.so', 'liblibtorrent.so']
