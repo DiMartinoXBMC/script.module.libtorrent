@@ -1,4 +1,7 @@
-﻿0.6.19c:
+﻿0.6.19k:
+Added custom library path
+
+0.6.19c:
 Added Android x86 0.16.19
 
 0.6.19b:

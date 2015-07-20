@@ -12,11 +12,20 @@ import os
 __settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
 __version__ = __settings__.getAddonInfo('version')
 __plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
+__language__ = __settings__.getLocalizedString
 
 libtorrent=None
 platform = get_platform()
-dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.module.libtorrent',
-                       'python_libtorrent')
+set_dirname=__settings__.getSetting('dirname')
+log('set_dirname:' +str(set_dirname))
+if getSettingAsBool('custom_dirname') and set_dirname:
+
+    dirname=set_dirname
+else:
+    dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.module.libtorrent',
+                           'python_libtorrent')
+
+log('dirname:' +str(dirname))
 dest_path = os.path.join(dirname, platform['system'])
 sys.path.insert(0, dest_path)
 

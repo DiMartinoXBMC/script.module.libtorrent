@@ -18,5 +18,5 @@ except Exception, e:
     log('Error importing from get_libtorrent(). Exception: ' + str(e))
 
 
-line2='Python-libtorrent %s IMPORTED successfully' % version if sucsess else 'Failed to import python-libtorrent!'
+line2='python-libtorrent %s IMPORTED successfully' % version if sucsess else 'Failed to import python-libtorrent!'
 dialog.ok('Libtorrent','OS:'+p['os']+' arch:'+p['arch'], line2)

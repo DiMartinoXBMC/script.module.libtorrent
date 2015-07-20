@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-    <string id="1000">Инициализация</string>
-	<string id="1001">Соединение</string>
-	<string id="1002">Жду ответа</string>
-	<string id="1003">Передаю данные</string>
-	<string id="1004">Получаю ссылку</string>
-	<string id="1005">Начинаю воспроизведение</string>
-	<string id="1006">Отмена</string>
-	
-	<string id="1100">Предварительная буферизация</string>
-	<string id="1101">Буферизация</string>
-	<string id="1102">Скачивание</string>
-	<string id="1103">Проверка</string>
-	<string id="1104">TS Engine бездействует</string>
-	<string id="1105">TS Engine ожидает</string>
+    <string id="1000">Настройки</string>
+	<string id="1001">Изменить путь к библиотеке</string>
+	<string id="1002">Путь к библиотеке</string>
+	<string id="1003">Отключить автоматическое определение системы</string>
+	<string id="1004">Библиотека для</string>
+	<string id="1005"></string>
+	<string id="1006"></string>
 	
 	<string id="1150">Пиры:%s Скорость:%s</string>
 	<string id="1151">Секунд %ы'</string>

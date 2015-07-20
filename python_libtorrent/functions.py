@@ -9,8 +9,7 @@ __version__ = __settings__.getAddonInfo('version')
 __plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
 __icon__=os.path.join(xbmc.translatePath('special://home'), 'addons',
                                    'script.module.libtorrent', 'icon.png')
-#dirname = os.path.join(xbmc.translatePath('special://home'), 'addons', 'script.module.libtorrent')
-#sys.path.insert(0, dirname)
+__language__ = __settings__.getLocalizedString
 
 from platform_pulsar import get_platform, get_libname
 
@@ -18,7 +17,7 @@ class DownloaderClass():
     def __init__(self, dest_path):
         self.dest_path = dest_path
         self.platform = get_platform()
-        tempdir(self.platform)
+        tempdir(self.dest_path)
 
     def tools_download(self):
         for libname in get_libname(self.platform):
@@ -47,13 +46,12 @@ def log(msg):
     except:
         xbmc.log("### [%s]: %s" % (__plugin__,'ERROR LOG',), level=xbmc.LOGNOTICE )
 
-def tempdir(platform):
-    dirname=xbmc.translatePath('special://temp')
-    for subdir in ('xbmcup', 'script.module.libtorrent', 'python_libtorrent', platform['system']):
-        dirname = os.path.join(dirname, subdir)
-        if not xbmcvfs.exists(dirname):
-            xbmcvfs.mkdir(dirname)
+def tempdir(dirname):
+    xbmcvfs.mkdirs(dirname)
     return dirname
+
+def getSettingAsBool(setting):
+    return __settings__.getSetting(setting).lower() == "true"
 
 class LibraryManager():
     def __init__(self, dest_path):

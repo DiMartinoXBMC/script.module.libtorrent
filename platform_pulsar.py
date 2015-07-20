@@ -7,7 +7,7 @@
 import sys
 import os
 try:
-    import xbmc
+    import xbmc, xbmcaddon
 except:
     pass
 
@@ -24,28 +24,73 @@ def get_libname(platform):
     return libname
 
 def get_platform():
-    ret = {
-        "arch": sys.maxsize > 2 ** 32 and "x64" or "x86",
-    }
-    if xbmc.getCondVisibility("system.platform.android"):
-        ret["os"] = "android"
-        if "arm" in os.uname()[4]:
-            ret["arch"] = "arm"
-    elif xbmc.getCondVisibility("system.platform.linux"):
-        ret["os"] = "linux"
-        if "arm" in os.uname()[4]:
-            ret["arch"] = "arm"
-    elif xbmc.getCondVisibility("system.platform.xbox"):
-        system_platform = "xbox"
-        ret["arch"] = ""
-    elif xbmc.getCondVisibility("system.platform.windows"):
-        ret["os"] = "windows"
-    elif xbmc.getCondVisibility("system.platform.osx"):
-        ret["os"] = "darwin"
-    elif xbmc.getCondVisibility("system.platform.ios"):
-        ret["os"] = "ios"
-        ret["arch"] = "arm"
+    __settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
+    __version__ = __settings__.getAddonInfo('version')
+    __plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
+    __language__ = __settings__.getLocalizedString
 
+    if __settings__.getSetting('custom_system').lower() == "true":
+        system = int(__settings__.getSetting('set_system'))
+        print 'USE CUSTOM SYSTEM: '+__language__(1100+system)
+
+        ret={}
+
+        if system==0:
+            ret["os"] = "windows"
+            ret["arch"] = "x86"
+        elif system==1:
+            ret["os"] = "linux"
+            ret["arch"] = "x86"
+        elif system==2:
+            ret["os"] = "linux"
+            ret["arch"] = "x64"
+        elif system==3:
+            ret["os"] = "linux"
+            ret["arch"] = "arm"
+        elif system==4:
+            ret["os"] = "linux"
+            ret["arch"] = "arm"
+        elif system==5:
+            ret["os"] = "android"
+            ret["arch"] = "arm"
+        elif system==6:
+            ret["os"] = "android"
+            ret["arch"] = "x86"
+        elif system==7:
+            ret["os"] = "darwin"
+            ret["arch"] = "x64"
+        elif system==8:
+            ret["os"] = "ios"
+            ret["arch"] = "arm"
+        elif system==9:
+            ret["os"] = "ios"
+            ret["arch"] = "arm"
+
+    else:
+
+        ret = {
+            "arch": sys.maxsize > 2 ** 32 and "x64" or "x86",
+        }
+        if xbmc.getCondVisibility("system.platform.android"):
+            ret["os"] = "android"
+            if "arm" in os.uname()[4]:
+                ret["arch"] = "arm"
+        elif xbmc.getCondVisibility("system.platform.linux"):
+            ret["os"] = "linux"
+            if "arm" in os.uname()[4]:
+                ret["arch"] = "arm"
+        elif xbmc.getCondVisibility("system.platform.windows"):
+            ret["os"] = "windows"
+        elif xbmc.getCondVisibility("system.platform.osx"):
+            ret["os"] = "darwin"
+        elif xbmc.getCondVisibility("system.platform.ios"):
+            ret["os"] = "ios"
+            ret["arch"] = "arm"
+
+    ret=get_system(ret)
+    return ret
+
+def get_system(ret):
     ret["system"] = ''
     ret["message"] = ['', '']
 
