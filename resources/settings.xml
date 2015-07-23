@@ -3,6 +3,7 @@
  <category label="1000">
   <setting id="custom_dirname" type="bool" label="1001" default="false" />
   <setting id="dirname" type="folder" label="1002" enable="eq(-1,true)" />
+  <setting id="ask_dirname" type="bool" label="1005" default="false" />
   <setting id="custom_system" type="bool" label="1003" default="false" />
   <setting id="set_system"  type="enum" label="1004" enable="eq(-1,true)" default="0" lvalues="1100|1101|1102|1103|1104|1105|1106|1107|1108|1109"/>
  </category>

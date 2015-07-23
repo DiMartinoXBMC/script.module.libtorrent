@@ -1,4 +1,7 @@
-﻿0.6.19k:
+﻿0.16.19k:
+Edit custom library path with keyboard
+
+0.6.19k:
 Added custom library path
 
 0.6.19c:
