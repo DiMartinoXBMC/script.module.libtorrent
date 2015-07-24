@@ -1,5 +1,7 @@
-﻿0.16.19k:
+﻿0.16.19:
 Edit custom library path with keyboard
+Added Android permission workaround (copy to kodi path)
+Added Android system import try
 
 0.6.19k:
 Added custom library path

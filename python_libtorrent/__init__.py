@@ -65,28 +65,41 @@ try:
         log('CDLL = ' + str(liblibtorrent))
         import libtorrent
     elif platform['system'] in ['android_armv7', 'android_x86']:
-        import imp
-        from ctypes import CDLL
-
-        dll_path=os.path.join(dest_path, 'liblibtorrent.so')
-        log('CDLL path = ' + dll_path)
-        liblibtorrent=CDLL(dll_path)
-        log('CDLL = ' + str(liblibtorrent))
-
-        path_list = [dest_path]
-        log('path_list = ' + str(path_list))
-        fp, pathname, description = imp.find_module('libtorrent', path_list)
-        log('fp = ' + str(fp))
-        log('pathname = ' + str(pathname))
         try:
-            libtorrent = imp.load_module('libtorrent', fp, pathname, description)
-        finally:
-            if fp: fp.close()
+            import libtorrent
+            log('Imported libtorrent v' + libtorrent.version + ' from system')
+        except Exception, e:
+            log('Error importing libtorrent from system. Exception: ' + str(e))
 
-    log('Imported libtorrent v' + libtorrent.version + ' from ' + dest_path)
+            import imp
+            from ctypes import CDLL
+            try:
+                dll_path=os.path.join(dest_path, 'liblibtorrent.so')
+                log('CDLL path = ' + dll_path)
+                liblibtorrent=CDLL(dll_path)
+                log('CDLL = ' + str(liblibtorrent))
+            except:
+                # If no permission in dest_path we need to go deeper!
+                # http://i3.kym-cdn.com/photos/images/original/000/531/557/a88.jpg
+                dest_path=lm.android_workaround()
+                dll_path=os.path.join(dest_path, 'liblibtorrent.so')
+                log('NEW CDLL path = ' + dll_path)
+            liblibtorrent=CDLL(dll_path)
+            log('CDLL = ' + str(liblibtorrent))
+            path_list = [dest_path]
+            log('path_list = ' + str(path_list))
+            fp, pathname, description = imp.find_module('libtorrent', path_list)
+            log('fp = ' + str(fp))
+            log('pathname = ' + str(pathname))
+            try:
+                libtorrent = imp.load_module('libtorrent', fp, pathname, description)
+            finally:
+                if fp: fp.close()
+
+    log('Imported libtorrent v' + libtorrent.version + ' from "' + dest_path + '"')
 
 except Exception, e:
-    log('Error importing libtorrent from' + dest_path + '. Exception: ' + str(e))
+    log('Error importing libtorrent from "' + dest_path + '". Exception: ' + str(e))
     pass
 
 def get_libtorrent():

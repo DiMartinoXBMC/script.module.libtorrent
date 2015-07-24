@@ -13,31 +13,6 @@ __language__ = __settings__.getLocalizedString
 
 from platform_pulsar import get_platform, get_libname
 
-class DownloaderClass():
-    def __init__(self, dest_path):
-        self.dest_path = dest_path
-        self.platform = get_platform()
-        tempdir(self.dest_path)
-
-    def tools_download(self):
-        for libname in get_libname(self.platform):
-            dest = os.path.join(self.dest_path, libname)
-            log("try to fetch %s" % libname)
-            url = "%s/%s/%s.zip" % (__libbaseurl__, self.platform['system'], libname)
-            if libname!='liblibtorrent.so':
-                try:
-                    self.http = HTTP()
-                    self.http.fetch(url, download=dest + ".zip", progress=True)
-                    log("%s -> %s" % (url, dest))
-                    xbmc.executebuiltin('XBMC.Extract("%s.zip","%s")' % (dest, self.dest_path), True)
-                    xbmcvfs.delete(dest + ".zip")
-                except:
-                    text = 'Failed download %s!' % libname
-                    xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__plugin__,text,750,__icon__))
-            else:
-                x=xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so'), dest)
-        return True
-
 def log(msg):
     try:
         xbmc.log("### [%s]: %s" % (__plugin__,msg,), level=xbmc.LOGNOTICE )
@@ -45,10 +20,6 @@ def log(msg):
         xbmc.log("### [%s]: %s" % (__plugin__,msg.encode("utf-8", "ignore"),), level=xbmc.LOGNOTICE )
     except:
         xbmc.log("### [%s]: %s" % (__plugin__,'ERROR LOG',), level=xbmc.LOGNOTICE )
-
-def tempdir(dirname):
-    xbmcvfs.mkdirs(dirname)
-    return dirname
 
 def getSettingAsBool(setting):
     return __settings__.getSetting(setting).lower() == "true"
@@ -85,4 +56,39 @@ class LibraryManager():
             self.download()
 
     def download(self):
-        DownloaderClass(self.dest_path).tools_download()
+        xbmcvfs.mkdirs(self.dest_path)
+        for libname in get_libname(self.platform):
+            dest = os.path.join(self.dest_path, libname)
+            log("try to fetch %s" % libname)
+            url = "%s/%s/%s.zip" % (__libbaseurl__, self.platform['system'], libname)
+            if libname!='liblibtorrent.so':
+                try:
+                    self.http = HTTP()
+                    self.http.fetch(url, download=dest + ".zip", progress=True)
+                    log("%s -> %s" % (url, dest))
+                    xbmc.executebuiltin('XBMC.Extract("%s.zip","%s")' % (dest, self.dest_path), True)
+                    xbmcvfs.delete(dest + ".zip")
+                except:
+                    text = 'Failed download %s!' % libname
+                    xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__plugin__,text,750,__icon__))
+            else:
+                xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so'), dest)
+        return True
+
+    def android_workaround(self):
+        new_dest_path=os.path.join(xbmc.translatePath('special://xbmc'), self.platform['system'])
+        for libname in get_libname(self.platform):
+            libpath=os.path.join(self.dest_path, libname)
+            size=str(os.path.getsize(libpath))
+            new_libpath=os.path.join(new_dest_path, libname)
+
+            if not xbmcvfs.exists(new_libpath):
+                xbmcvfs.copy(libpath, new_libpath)
+                log('Copied %s -> %s' %(libpath, new_libpath))
+            else:
+                new_size=str(os.path.getsize(new_libpath))
+                if size!=new_size:
+                    xbmcvfs.delete(new_libpath)
+                    xbmcvfs.copy(libpath, new_libpath)
+                    log('Deleted and copied (%s) %s -> (%s) %s' %(size, libpath, new_size, new_libpath))
+        return new_dest_path

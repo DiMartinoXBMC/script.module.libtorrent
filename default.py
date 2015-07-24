@@ -26,6 +26,7 @@ __settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
 __language__ = __settings__.getLocalizedString
 if __settings__.getSetting('ask_dirname')=='true':
     set_dirname=__settings__.getSetting('dirname')
+    __settings__.setSetting('ask_dirname','false')
     keyboard = xbmc.Keyboard(set_dirname, __language__(1002))
     keyboard.doModal()
     path_keyboard = keyboard.getText()
