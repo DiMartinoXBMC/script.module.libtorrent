@@ -76,7 +76,7 @@ class LibraryManager():
         return True
 
     def android_workaround(self):
-        new_dest_path=os.path.join(xbmc.translatePath('special://xbmc'), self.platform['system'])
+        new_dest_path='/data/data/org.xbmc.kodi/lib/'
         for libname in get_libname(self.platform):
             libpath=os.path.join(self.dest_path, libname)
             size=str(os.path.getsize(libpath))
