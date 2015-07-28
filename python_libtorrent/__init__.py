@@ -74,10 +74,19 @@ try:
             log('CDLL = ' + str(liblibtorrent))
         except:
             # If no permission in dest_path we need to go deeper!
-            # http://i3.kym-cdn.com/photos/images/original/000/531/557/a88.jpg
-            dest_path=lm.android_workaround()
-            dll_path=os.path.join(dest_path, 'liblibtorrent.so')
-            log('NEW CDLL path = ' + dll_path)
+            try:
+                dest_path=lm.android_workaround(new_dest_path='/data/data/org.xbmc.kodi/lib/')
+                dll_path=os.path.join(dest_path, 'liblibtorrent.so')
+                log('NEW CDLL path = ' + dll_path)
+                liblibtorrent=CDLL(dll_path)
+                log('CDLL = ' + str(liblibtorrent))
+            except:
+                # http://i3.kym-cdn.com/photos/images/original/000/531/557/a88.jpg
+                dest_path=lm.android_workaround(new_dest_path=xbmc.translatePath('special://xbmc'))
+                dll_path=os.path.join(dest_path, 'liblibtorrent.so')
+                log('NEW CDLL path = ' + dll_path)
+                liblibtorrent=CDLL(dll_path)
+                log('CDLL = ' + str(liblibtorrent))
         liblibtorrent=CDLL(dll_path)
         log('CDLL = ' + str(liblibtorrent))
         path_list = [dest_path]

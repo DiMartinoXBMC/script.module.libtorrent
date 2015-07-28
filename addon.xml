@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<addon id='script.module.libtorrent' version='0.16.19' name='LibTorrent' provider-name='DiMartino, srg70, RussakHH'>
+<addon id='script.module.libtorrent' version='0.16.19b' name='LibTorrent' provider-name='DiMartino, srg70, RussakHH'>
   <requires>
     <import addon='xbmc.python' version='2.1.0'/>
   </requires>

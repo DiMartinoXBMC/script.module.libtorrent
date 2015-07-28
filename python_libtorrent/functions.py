@@ -75,8 +75,7 @@ class LibraryManager():
                 xbmcvfs.copy(os.path.join(self.dest_path, 'libtorrent.so'), dest)
         return True
 
-    def android_workaround(self):
-        new_dest_path='/data/data/org.xbmc.kodi/lib/'
+    def android_workaround(self, new_dest_path):
         for libname in get_libname(self.platform):
             libpath=os.path.join(self.dest_path, libname)
             size=str(os.path.getsize(libpath))
