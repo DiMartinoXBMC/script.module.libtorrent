@@ -44,7 +44,7 @@ if platform['system'] not in ['windows']:
     log('os: '+str(os.uname()))
 
 try:
-    if platform['system'] in ['linux_x86', 'windows', 'linux_arm', 'linux_x86_64']:
+    if platform['system'] in ['linux_x86', 'windows', 'linux_armv6', 'linux_armv7', 'linux_x86_64']:
         import libtorrent
     elif platform['system'] in ['darwin']:
         import imp

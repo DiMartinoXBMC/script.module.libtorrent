@@ -13,7 +13,7 @@ except:
 
 def get_libname(platform):
     libname=[]
-    if platform['system'] in ['darwin', 'linux_x86', 'linux_arm', 'linux_x86_64']:
+    if platform['system'] in ['darwin', 'linux_x86', 'linux_armv6', 'linux_armv7', 'linux_x86_64']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
@@ -77,6 +77,10 @@ def get_platform():
             ret["os"] = "linux"
             if "arm" in os.uname()[4]:
                 ret["arch"] = "arm"
+                if "arm7" in os.uname()[4]:
+                    ret["arch"] = "armv7"
+                elif "arm6" in os.uname()[4]:
+                    ret["arch"] = "armv6"
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):
@@ -104,8 +108,8 @@ def get_system(ret):
         ret["system"] = 'linux_x86'
         ret["message"] = ['Linux has static compiled python-libtorrent included but it didn\'t work.',
                           'You should install it by "sudo apt-get install python-libtorrent"']
-    elif ret["os"] == "linux" and ret["arch"] == "arm":
-        ret["system"] = 'linux_arm'
+    elif ret["os"] == "linux" and "arm" in ret["arch"]:
+        ret["system"] = 'linux_'+ret["arch"]
         ret["message"] = ['As far as I know you can compile python-libtorrent for ARMv6-7.',
                           'You should search for "OneEvil\'s OpenELEC libtorrent" or use Ace Stream.']
     elif ret["os"] == "android":
