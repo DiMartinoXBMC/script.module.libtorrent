@@ -10,8 +10,8 @@
 	
 	<string id="1100">Windows 32-bit, 64-bit</string>
 	<string id="1101">Linux 32-bit</string>
-	<string id="1102">Linux 64-bit (not ready)</string>
-	<string id="1103">Linux ARM v7 (RPi 2, not ready)</string>
+	<string id="1102">Linux 64-bit</string>
+	<string id="1103">Linux ARM v7 (RPi 2)</string>
 	<string id="1104">Linux ARM v6 (RPi, not ready)</string>
 	<string id="1105">Android ARM v7</string>
 	<string id="1106">Android 32-bit</string>

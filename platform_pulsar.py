@@ -13,7 +13,7 @@ except:
 
 def get_libname(platform):
     libname=[]
-    if platform['system'] in ['darwin', 'linux_x86', 'linux_armv6', 'linux_armv7', 'linux_x86_64']:
+    if platform['system'] in ['darwin', 'linux_x86', 'linux_arm', 'linux_armv6', 'linux_armv7', 'linux_x86_64']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
@@ -44,10 +44,10 @@ def get_platform():
             ret["arch"] = "x64"
         elif system==3:
             ret["os"] = "linux"
-            ret["arch"] = "arm"
+            ret["arch"] = "armv7"
         elif system==4:
             ret["os"] = "linux"
-            ret["arch"] = "arm"
+            ret["arch"] = "armv6"
         elif system==5:
             ret["os"] = "android"
             ret["arch"] = "arm"
@@ -75,12 +75,14 @@ def get_platform():
                 ret["arch"] = "arm"
         elif xbmc.getCondVisibility("system.platform.linux"):
             ret["os"] = "linux"
-            if "arm" in os.uname()[4]:
-                ret["arch"] = "arm"
-                if "arm7" in os.uname()[4]:
+            uname=os.uname()[4]
+            if "arm" in uname:
+                if "armv7" in uname:
                     ret["arch"] = "armv7"
-                elif "arm6" in os.uname()[4]:
+                elif "armv6" in uname:
                     ret["arch"] = "armv6"
+                else:
+                    ret["arch"] = "arm"
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):
