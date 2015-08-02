@@ -25,9 +25,9 @@ def getSettingAsBool(setting):
     return __settings__.getSetting(setting).lower() == "true"
 
 class LibraryManager():
-    def __init__(self, dest_path):
+    def __init__(self, dest_path, platform):
         self.dest_path = dest_path
-        self.platform = get_platform()
+        self.platform = platform
         self.root=os.path.dirname(__file__)
 
     def check_exist(self):
@@ -41,7 +41,7 @@ class LibraryManager():
         for libname in get_libname(self.platform):
             if libname!='liblibtorrent.so':
                 self.libpath = os.path.join(self.dest_path, libname)
-                self.sizepath=os.path.join(self.root, self.platform['system'], libname+'.size.txt')
+                self.sizepath=os.path.join(self.root, self.platform['system'], self.platform['version'], libname+'.size.txt')
                 size=str(os.path.getsize(self.libpath))
                 size_old=open( self.sizepath, "r" ).read()
                 if size_old!=size:
@@ -60,7 +60,7 @@ class LibraryManager():
         for libname in get_libname(self.platform):
             dest = os.path.join(self.dest_path, libname)
             log("try to fetch %s" % libname)
-            url = "%s/%s/%s.zip" % (__libbaseurl__, self.platform['system'], libname)
+            url = "%s/%s/%s/%s.zip" % (__libbaseurl__, self.platform['system'], self.platform['version'], libname)
             if libname!='liblibtorrent.so':
                 try:
                     self.http = HTTP()

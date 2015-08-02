@@ -37,7 +37,7 @@ else:
 dest_path = os.path.join(dirname, platform['system'], platform['version'])
 sys.path.insert(0, dest_path)
 
-lm=LibraryManager(dest_path)
+lm=LibraryManager(dest_path, platform)
 if not lm.check_exist():
     ok=lm.download()
     xbmc.sleep(2000)
