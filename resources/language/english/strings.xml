@@ -6,7 +6,8 @@
 	<string id="1003">Disable automatic system detection</string>
 	<string id="1004">Use library for</string>
 	<string id="1005">Edit path with keyboard (on run)</string>
-	<string id="1006"></string>
+	<string id="1006">Custom python-libtorrent version</string>
+	<string id="1007">Use python-libtorrent (if available)</string>
 	
 	<string id="1100">Windows 32-bit, 64-bit</string>
 	<string id="1101">Linux 32-bit</string>
@@ -19,8 +20,8 @@
 	<string id="1108">Apple TV2 (not ready)</string>
 	<string id="1109">iOS (not ready)</string>
 	
-	<string id="1150">Seeds: %s Speed: %s</string>
-	<string id="1151">Seconds %s'</string>
+	<string id="1150">0.16.19</string>
+	<string id="1151">1.0.6</string>
 	
 	<string id="1010">TS Engine not running!</string>
 	<string id="1011">No answer</string>
