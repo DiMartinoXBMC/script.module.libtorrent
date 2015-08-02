@@ -14,7 +14,9 @@ class Public:
         self.root=os.path.dirname(__file__)
         for dir in os.listdir(self.root):
             if os.path.isdir(os.path.join(self.root,dir)):
-                self.platforms.append({'system':dir})
+                for subdir in os.listdir(os.path.join(self.root,dir)):
+                    if os.path.isdir(os.path.join(self.root,dir,subdir)):
+                        self.platforms.append({'system':dir, 'version':subdir})
         self._generate_size_file()
 
     def _generate_size_file( self ):
@@ -22,28 +24,29 @@ class Public:
             for libname in get_libname(platform):
                 self.libname=libname
                 self.platform=platform
-                self.libdir = os.path.join(self.root, self.platform['system'])
+                self.libdir = os.path.join(self.root, self.platform['system'], self.platform['version'])
                 self.libpath = os.path.join(self.libdir, self.libname)
                 self.sizepath=self.libpath+'.size.txt'
                 self.zipname=self.libname+'.zip'
-                self.zippath=os.path.join(self.libdir, self.zipname)
+                zippath=os.path.join(self.libdir, self.zipname)
+                system=platform['system']+'/'+platform['version']+'/'
                 if os.path.exists(self.libpath):
                     if not os.path.exists(self.sizepath):
-                        print platform['system']+'/'+self.libname+' NO SIZE'
+                        print system+self.libname+' NO SIZE'
                         self._makezip()
-                    elif not os.path.exists(self.zippath):
-                        print platform['system']+'/'+self.libname+' NO ZIP'
+                    elif not os.path.exists(zippath):
+                        print system+self.libname+' NO ZIP'
                         self._makezip()
                     else:
                         size=str(os.path.getsize(self.libpath))
                         size_old=open( self.sizepath, "r" ).read()
                         if size_old!=size:
-                            print platform['system']+'/'+self.libname+' NOT EQUAL'
+                            print system+self.libname+' NOT EQUAL'
                             self._makezip()
                         else:
-                            print platform['system']+'/'+self.libname+' NO ACTION'
+                            print system+self.libname+' NO ACTION'
                 else:
-                    print platform['system']+'/'+self.libname+' NO LIB'
+                    print system+self.libname+' NO LIB'
 
     def _makezip(self):
         open( self.sizepath, "w" ).write( str(os.path.getsize(self.libpath)) )

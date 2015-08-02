@@ -26,7 +26,15 @@ else:
                            'python_libtorrent')
 
 log('dirname:' +str(dirname))
-dest_path = os.path.join(dirname, platform['system'])
+
+default_version=0 #0.16.19
+set_version=__settings__.getSetting('set_version')
+if getSettingAsBool('custom_version'):
+    platform['version'] = __language__(1150+int(set_version))
+else:
+    platform['version'] = __language__(1150+default_version)
+
+dest_path = os.path.join(dirname, platform['system'], platform['version'])
 sys.path.insert(0, dest_path)
 
 lm=LibraryManager(dest_path)
