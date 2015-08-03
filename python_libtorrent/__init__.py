@@ -17,9 +17,8 @@ __language__ = __settings__.getLocalizedString
 libtorrent=None
 platform = get_platform()
 set_dirname=__settings__.getSetting('dirname')
-log('set_dirname:' +str(set_dirname))
 if getSettingAsBool('custom_dirname') and set_dirname:
-
+    log('set_dirname:' +str(set_dirname))
     dirname=set_dirname
 else:
     dirname = os.path.join(xbmc.translatePath('special://temp'), 'xbmcup', 'script.module.libtorrent',
@@ -27,13 +26,18 @@ else:
 
 log('dirname:' +str(dirname))
 
-default_version=0 #0.16.19
-set_version=__settings__.getSetting('set_version')
+default_version = 0 #[0.16.19, 1.0.6]
+set_version = __settings__.getSetting('set_version')
+default_path = __language__(1150+default_version)
 if getSettingAsBool('custom_version'):
+    log('set_version:' +str(set_version)+' '+__language__(1150+int(set_version)))
     platform['version'] = __language__(1150+int(set_version))
 else:
-    platform['version'] = __language__(1150+default_version)
+    platform['version'] = default_path
 
+if not os.path.exists(os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])):
+    log('set_version: back to default '+default_path)
+    platform['version'] = default_path
 dest_path = os.path.join(dirname, platform['system'], platform['version'])
 sys.path.insert(0, dest_path)
 
