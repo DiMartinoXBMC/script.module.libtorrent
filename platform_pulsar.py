@@ -77,7 +77,7 @@ def get_platform():
             ret["os"] = "linux"
             uname=os.uname()[4]
             if "arm" in uname:
-                if "armv7" in uname:
+                if "armv7" in uname or "aarch64" in uname:
                     ret["arch"] = "armv7"
                 elif "armv6" in uname:
                     ret["arch"] = "armv6"
