@@ -1,4 +1,7 @@
-﻿0.16.19:
+﻿1.0.7:
+Added 1.0.7 for Unix and Windows
+
+0.16.19:
 Edit custom library path with keyboard
 Added Android permission workaround (copy to kodi path)
 Added Android system import try
