@@ -71,13 +71,13 @@ def get_platform():
         }
         if xbmc.getCondVisibility("system.platform.android"):
             ret["os"] = "android"
-            if "arm" in os.uname()[4]:
+            if "arm" in os.uname()[4] or "aarch64" in os.uname()[4]:
                 ret["arch"] = "arm"
         elif xbmc.getCondVisibility("system.platform.linux"):
             ret["os"] = "linux"
             uname=os.uname()[4]
             if "arm" in uname:
-                if "armv7" in uname or "aarch64" in uname:
+                if "armv7" in uname:
                     ret["arch"] = "armv7"
                 elif "armv6" in uname:
                     ret["arch"] = "armv6"
