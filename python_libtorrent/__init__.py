@@ -44,7 +44,7 @@ if not os.path.exists(os.path.join(os.path.dirname(__file__), platform['system']
     for ver in versions:
         if not os.path.isdir(os.path.join(os.path.dirname(__file__), platform['system'],ver)):
             versions.remove(ver)
-    if len(versions)>1:
+    if len(versions)>0:
         platform['version'] = versions[0]
     else:
         log('die because the folder is empty')
@@ -69,7 +69,7 @@ if platform['system'] not in ['windows']:
 try:
     if platform['system'] in ['linux_x86', 'windows', 'linux_armv6', 'linux_armv7', 'linux_x86_64']:
         import libtorrent
-    elif platform['system'] in ['darwin', 'ios']:
+    elif platform['system'] in ['darwin', 'ios_arm']:
         import imp
         path_list = [dest_path]
         log('path_list = ' + str(path_list))

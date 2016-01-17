@@ -125,8 +125,8 @@ def get_system(ret):
         ret["system"] = 'darwin'
         ret["message"] = ['It is possible to compile python-libtorrent for OS X.',
                           'But you would have to do it by yourself, there is some info on github.com.']
-    elif ret["os"] == "ios":
-        ret["system"] = 'ios'
+    elif ret["os"] == "ios" and ret["arch"] == "arm":
+        ret["system"] = 'ios_arm'
         ret["message"] = ['It is probably NOT possible to compile python-libtorrent for iOS.',
                           'But you can use torrent-client control functions.']
 
