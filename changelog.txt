@@ -1,5 +1,5 @@
 ﻿1.0.7:
-Added 1.0.7 for Unix and Windows
+Added 1.0.7 for Unix and Windows, Mac, iOS
 
 0.16.19:
 Edit custom library path with keyboard
