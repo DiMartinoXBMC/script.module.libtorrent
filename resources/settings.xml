@@ -7,6 +7,6 @@
   <setting id="custom_system" type="bool" label="1003" default="false" />
   <setting id="set_system"  type="enum" label="1004" visible="eq(-1,true)" default="0" lvalues="1100|1101|1102|1103|1104|1105|1106|1107|1108|1109"/>
   <setting id="custom_version" type="bool" label="1006" default="false" />
-  <setting id="set_version"  type="enum" label="1007" visible="eq(-1,true)" default="0" lvalues="1150|1151|1152"/>
+  <setting id="set_version"  type="enum" label="1007" visible="eq(-1,true)" default="0" lvalues="1150|1151|1152|1153"/>
  </category>
 </settings>

@@ -26,7 +26,7 @@ else:
 
 log('dirname:' +str(dirname))
 
-default_version = 0 #[0.16.19, 1.0.6, 1.0.7]
+default_version = 0 #[0.16.19, 1.0.6, 1.0.7, 1.0.8]
 set_version = __settings__.getSetting('set_version')
 default_path = __language__(1150+default_version)
 if getSettingAsBool('custom_version'):
