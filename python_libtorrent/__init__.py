@@ -45,7 +45,7 @@ if not os.path.exists(os.path.join(os.path.dirname(__file__), platform['system']
         if not os.path.isdir(os.path.join(os.path.dirname(__file__), platform['system'],ver)):
             versions.remove(ver)
     if len(versions)>0:
-        platform['version'] = versions[0]
+        platform['version'] = versions[-1]
     else:
         log('die because the folder is empty')
         exit()
