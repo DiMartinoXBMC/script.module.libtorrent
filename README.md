@@ -2,7 +2,7 @@ Python-Libtorrent for Kodi
 ==================
 script.module.libtorrent is a Kodi module that makes easy import of python-libtorrent for you. Example of usage is Torrenter v2 at https://github.com/DiMartinoXBMC/plugin.video.torrenter
 
-- Forum: http://forum.kodi.tv/showthread.php?tid=214366
+- Forum: https://forums.tvaddons.ag/addon-releases/29224-torrenter-v2.html
 
 Usage
 ---------------
