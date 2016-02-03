@@ -11,6 +11,7 @@ script.module.libtorrent is a Kodi module that makes easy import of python-libto
 - [YATP](https://github.com/romanvm/kodi.yatp)
 
 **Usage**
+
 Add module in requires of your addon.xml:
 ```python
 <import addon="script.module.libtorrent"/>
@@ -23,4 +24,5 @@ libtorrent=get_libtorrent()
 ```
 
 **License**
+
 MIT License
