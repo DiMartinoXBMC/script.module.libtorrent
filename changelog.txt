@@ -1,4 +1,7 @@
-﻿1.0.8:
+﻿1.0.9:
+Added 1.0.9 for Windows, Unix x86 & amd64
+
+1.0.8:
 Added 1.0.8 for Android and Windows, Mac, iOS
 
 1.0.7:
