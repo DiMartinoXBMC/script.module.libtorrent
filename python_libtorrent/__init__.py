@@ -54,20 +54,24 @@ if getSettingAsBool('custom_version'):
 else:
     platform['version'] = default_path
 
-if not os.path.exists(os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])):
-    log('set_version: back to default '+default_path)
+sizefile_path = os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])
+if not os.path.exists(sizefile_path):
+    log('set_version: no sizefile at %s back to default %s' % (sizefile_path, default_path))
     platform['version'] = default_path
-if not os.path.exists(os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])):
-    log('set_version: no default searching for any version')
-    versions = os.listdir(os.path.join(os.path.dirname(__file__), platform['system'],))
-    for ver in versions:
-        if not os.path.isdir(os.path.join(os.path.dirname(__file__), platform['system'],ver)):
-            versions.remove(ver)
-    if len(versions)>0:
-        platform['version'] = versions[-1]
-    else:
-        log('die because the folder is empty')
-        exit()
+    sizefile_path = os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])
+    if not os.path.exists(sizefile_path):
+        log('set_version: no default at %s searching for any version' % sizefile_path)
+        versions = os.listdir(os.path.join(os.path.dirname(__file__), platform['system']))
+        for ver in versions:
+            if not os.path.isdir(os.path.join(os.path.dirname(__file__), platform['system'], ver)):
+                versions.remove(ver)
+
+        if len(versions)>0:
+            platform['version'] = versions[-1]
+            log('set_version: chose %s out of %s' % (platform['version'], str(versions)))
+        else:
+            log('die because the folder is empty')
+            exit()
 dest_path = os.path.join(dirname, platform['system'], platform['version'])
 sys.path.insert(0, dest_path)
 
