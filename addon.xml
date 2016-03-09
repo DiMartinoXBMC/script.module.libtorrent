@@ -6,6 +6,7 @@
   <extension point="xbmc.python.script" library="default.py">
     <provides>executable</provides>
   </extension>
+  <extension point="xbmc.python.module" library="python_libtorrent"/>
   <extension point='xbmc.addon.metadata'>
     <platform>all</platform>
     <summary lang='en'>script.module.libtorrent is a Kodi module that makes easy import of python-libtorrent for you.</summary>
