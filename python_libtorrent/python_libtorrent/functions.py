@@ -35,7 +35,7 @@ __icon__=os.path.join(xbmc.translatePath('special://home'), 'addons',
                                    'script.module.libtorrent', 'icon.png')
 __language__ = __settings__.getLocalizedString
 
-from ..platform_pulsar import get_platform, get_libname
+from python_libtorrent.platform_pulsar import get_platform, get_libname
 
 def log(msg):
     try:
