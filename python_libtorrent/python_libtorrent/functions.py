@@ -52,7 +52,7 @@ class LibraryManager():
     def __init__(self, dest_path, platform):
         self.dest_path = dest_path
         self.platform = platform
-        self.root=os.path.dirname(__file__)
+        self.root=os.path.dirname(os.path.dirname(__file__))
 
     def check_exist(self):
         for libname in get_libname(self.platform):
