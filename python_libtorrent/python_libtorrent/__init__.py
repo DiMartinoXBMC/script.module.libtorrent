@@ -32,6 +32,7 @@ __settings__ = xbmcaddon.Addon(id='script.module.libtorrent')
 __version__ = __settings__.getAddonInfo('version')
 __plugin__ = __settings__.getAddonInfo('name') + " v." + __version__
 __language__ = __settings__.getLocalizedString
+__root__ = os.path.dirname(os.path.dirname(__file__))
 
 libtorrent=None
 platform = get_platform()
@@ -54,16 +55,16 @@ if getSettingAsBool('custom_version'):
 else:
     platform['version'] = default_path
 
-sizefile_path = os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])
+sizefile_path = os.path.join(__root__, platform['system'], platform['version'])
 if not os.path.exists(sizefile_path):
     log('set_version: no sizefile at %s back to default %s' % (sizefile_path, default_path))
     platform['version'] = default_path
-    sizefile_path = os.path.join(os.path.dirname(__file__), platform['system'], platform['version'])
+    sizefile_path = os.path.join(__root__, platform['system'], platform['version'])
     if not os.path.exists(sizefile_path):
         log('set_version: no default at %s searching for any version' % sizefile_path)
-        versions = os.listdir(os.path.join(os.path.dirname(__file__), platform['system']))
+        versions = os.listdir(os.path.join(__root__, platform['system']))
         for ver in versions:
-            if not os.path.isdir(os.path.join(os.path.dirname(__file__), platform['system'], ver)):
+            if not os.path.isdir(os.path.join(__root__, platform['system'], ver)):
                 versions.remove(ver)
 
         if len(versions)>0:
