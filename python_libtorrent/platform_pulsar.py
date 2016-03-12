@@ -48,7 +48,8 @@ def log(msg):
 def get_libname(platform):
     libname=[]
     if platform['system'] in ['darwin', 'linux_x86', 'linux_arm', 'linux_armv6',
-                              'linux_armv7', 'linux_x86_64', 'ios_arm', 'linux_mips']:
+                              'linux_armv7', 'linux_x86_64', 'ios_arm',
+                              'linux_mipsel_ucs2', 'linux_mipsel_ucs4']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
@@ -100,7 +101,10 @@ def get_platform():
             ret["arch"] = "arm"
         elif system==10:
             ret["os"] = "linux"
-            ret["arch"] = "mips"
+            ret["arch"] = "mipsel_ucs2"
+        elif system==11:
+            ret["os"] = "linux"
+            ret["arch"] = "mipsel_ucs4"
     else:
 
         ret = {
@@ -121,7 +125,10 @@ def get_platform():
                 else:
                     ret["arch"] = "arm"
             elif "mips" in uname:
-                ret["arch"] = "mips"
+                if sys.maxunicode > 65536:
+                    ret["arch"] = 'mipsel_ucs4'
+                else:
+                    ret["arch"] = 'mipsel_ucs2'
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):

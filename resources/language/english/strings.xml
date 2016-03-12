@@ -19,7 +19,8 @@
 	<string id="1107">OS X</string>
 	<string id="1108">Apple TV2</string>
 	<string id="1109">iOS</string>
-	<string id="1110">Linux MIPS</string>
+	<string id="1110">Linux MIPSEL (UCS2)</string>
+	<string id="1111">Linux MIPSEL (UCS4)</string>
 	
 	<string id="1150">0.16.19</string>
 	<string id="1151">1.0.6</string>
