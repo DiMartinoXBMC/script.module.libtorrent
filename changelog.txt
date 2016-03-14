@@ -1,4 +1,5 @@
 ﻿1.0.9:
+1.0.9 is default
 Added 1.0.9 for Android, Mac, iOS, Unix ARM & mipsel (UCS2, UCS4)
 Added 1.0.9 for Windows, Unix x86 & amd64
 
