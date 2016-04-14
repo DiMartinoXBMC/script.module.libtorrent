@@ -46,12 +46,12 @@ else:
 
 log('dirname:' +str(dirname))
 
-default_version = 4 #[0.16.19, 1.0.6, 1.0.7, 1.0.8, 1.0.9]
-set_version = __settings__.getSetting('set_version')
-default_path = __language__(1150+default_version)
+versions = ['0.16.19', '1.0.6', '1.0.7', '1.0.8', '1.0.9', '1.1.0']
+default_path = versions[-1]
+set_version = int(__settings__.getSetting('set_version'))
 if getSettingAsBool('custom_version'):
-    log('set_version:' +str(set_version)+' '+__language__(1150+int(set_version)))
-    platform['version'] = __language__(1150+int(set_version))
+    log('set_version:' +str(set_version)+' '+versions[set_version])
+    platform['version'] = versions[set_version]
 else:
     platform['version'] = default_path
 
