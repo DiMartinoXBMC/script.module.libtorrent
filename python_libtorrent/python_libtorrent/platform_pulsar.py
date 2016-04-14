@@ -49,7 +49,7 @@ def get_libname(platform):
     libname=[]
     if platform['system'] in ['darwin', 'linux_x86', 'linux_arm', 'linux_armv6',
                               'linux_armv7', 'linux_x86_64', 'ios_arm',
-                              'linux_mipsel_ucs2', 'linux_mipsel_ucs4']:
+                              'linux_mipsel_ucs2', 'linux_mipsel_ucs4', 'linux_aarch64']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
@@ -105,6 +105,9 @@ def get_platform():
         elif system==11:
             ret["os"] = "linux"
             ret["arch"] = "mipsel_ucs4"
+        elif system == 12:
+            ret["os"] = "linux"
+            ret["arch"] = "linux_aarch64"
     else:
 
         ret = {
@@ -122,6 +125,8 @@ def get_platform():
                     ret["arch"] = "armv7"
                 elif "armv6" in uname:
                     ret["arch"] = "armv6"
+                elif "aarch64" in os.uname()[4]:
+                    ret["arch"] = "aarch64"
                 else:
                     ret["arch"] = "arm"
             elif "mips" in uname:
