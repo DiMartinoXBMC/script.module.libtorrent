@@ -92,7 +92,7 @@ if platform['system'] not in ['windows']:
 
 try:
     if platform['system'] in ['linux_x86', 'windows', 'linux_armv6', 'linux_armv7',
-                              'linux_x86_64', 'linux_mipsel_ucs2', 'linux_mipsel_ucs4']:
+                              'linux_x86_64', 'linux_mipsel_ucs2', 'linux_mipsel_ucs4', 'linux_aarch64']:
         import libtorrent
     elif platform['system'] in ['darwin', 'ios_arm']:
         import imp

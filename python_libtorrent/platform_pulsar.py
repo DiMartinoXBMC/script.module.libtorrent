@@ -125,8 +125,6 @@ def get_platform():
                     ret["arch"] = "armv7"
                 elif "armv6" in uname:
                     ret["arch"] = "armv6"
-                elif "aarch64" in os.uname()[4]:
-                    ret["arch"] = "aarch64"
                 else:
                     ret["arch"] = "arm"
             elif "mips" in uname:
@@ -134,6 +132,8 @@ def get_platform():
                     ret["arch"] = 'mipsel_ucs4'
                 else:
                     ret["arch"] = 'mipsel_ucs2'
+            if os.uname()[4]=="aarch64":
+                ret["arch"] = "aarch64"
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):
@@ -159,6 +159,10 @@ def get_system(ret):
                           'You should install it by "sudo apt-get install python-libtorrent"']
     elif ret["os"] == "linux" and ret["arch"] == "x86":
         ret["system"] = 'linux_x86'
+        ret["message"] = ['Linux has static compiled python-libtorrent included but it didn\'t work.',
+                          'You should install it by "sudo apt-get install python-libtorrent"']
+    elif ret["os"] == "linux" and ret["arch"] == "aarch64":
+        ret["system"] = 'linux_aarch64'
         ret["message"] = ['Linux has static compiled python-libtorrent included but it didn\'t work.',
                           'You should install it by "sudo apt-get install python-libtorrent"']
     elif ret["os"] == "linux" and ("arm" or "mips" in ret["arch"]):
