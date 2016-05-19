@@ -49,7 +49,7 @@ def get_libname(platform):
     libname=[]
     if platform['system'] in ['darwin', 'linux_x86', 'linux_arm', 'linux_armv6',
                               'linux_armv7', 'linux_x86_64', 'ios_arm',
-                              'linux_mipsel_ucs2', 'linux_mipsel_ucs4', 'linux_aarch64']:
+                              'linux_mipsel_ucs2', 'linux_mipsel_ucs4', 'linux_aarch64_ucs2', 'linux_aarch64_ucs4']:
         libname=['libtorrent.so']
     elif platform['system'] == 'windows':
         libname=['libtorrent.pyd']
@@ -107,7 +107,10 @@ def get_platform():
             ret["arch"] = "mipsel_ucs4"
         elif system == 12:
             ret["os"] = "linux"
-            ret["arch"] = "linux_aarch64"
+            ret["arch"] = "linux_aarch64_ucs2"
+        elif system == 13:
+            ret["os"] = "linux"
+            ret["arch"] = "linux_aarch64_ucs4"
     else:
 
         ret = {
@@ -132,8 +135,11 @@ def get_platform():
                     ret["arch"] = 'mipsel_ucs4'
                 else:
                     ret["arch"] = 'mipsel_ucs2'
-            if os.uname()[4]=="aarch64":
-                ret["arch"] = "aarch64"
+            elif "aarch64" in uname:
+                if sys.maxunicode > 65536:
+                    ret["arch"] = 'aarch64_ucs4'
+                else:
+                    ret["arch"] = 'aarch64_ucs2'
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):
@@ -161,8 +167,8 @@ def get_system(ret):
         ret["system"] = 'linux_x86'
         ret["message"] = ['Linux has static compiled python-libtorrent included but it didn\'t work.',
                           'You should install it by "sudo apt-get install python-libtorrent"']
-    elif ret["os"] == "linux" and ret["arch"] == "aarch64":
-        ret["system"] = 'linux_aarch64'
+    elif ret["os"] == "linux" and "aarch64" in ret["arch"]:
+        ret["system"] = 'linux_' + ret["arch"]
         ret["message"] = ['Linux has static compiled python-libtorrent included but it didn\'t work.',
                           'You should install it by "sudo apt-get install python-libtorrent"']
     elif ret["os"] == "linux" and ("arm" or "mips" in ret["arch"]):
