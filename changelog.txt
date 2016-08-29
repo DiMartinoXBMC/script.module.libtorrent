@@ -1,5 +1,5 @@
 ﻿1.1.1:
-Lastest library is default
+Added 1.1.1 for Android, Mac by srg70
 Added 1.1.1 for Unix x86, Unix amd64, Unix ARM v6,7, aarch64 (UCS4) by aisman
 
 1.1.0:
