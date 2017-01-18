@@ -136,10 +136,13 @@ def get_platform():
                 else:
                     ret["arch"] = 'mipsel_ucs2'
             elif "aarch64" in uname:
-                if sys.maxunicode > 65536:
-                    ret["arch"] = 'aarch64_ucs4'
+                if sys.maxint > 2147483647: #is_64bit_system
+                    if sys.maxunicode > 65536:
+                        ret["arch"] = 'aarch64_ucs4'
+                    else:
+                        ret["arch"] = 'aarch64_ucs2'
                 else:
-                    ret["arch"] = 'aarch64_ucs2'
+                    ret["arch"] = "armv7" #32-bit userspace
         elif xbmc.getCondVisibility("system.platform.windows"):
             ret["os"] = "windows"
         elif xbmc.getCondVisibility("system.platform.osx"):

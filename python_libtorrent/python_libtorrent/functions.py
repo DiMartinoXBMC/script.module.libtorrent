@@ -108,6 +108,8 @@ class LibraryManager():
             if not xbmcvfs.exists(new_libpath):
                 xbmcvfs.copy(libpath, new_libpath)
                 log('Copied %s -> %s' %(libpath, new_libpath))
+                if not xbmcvfs.exists(new_libpath):
+                    log('Failed!')
             else:
                 new_size=str(os.path.getsize(new_libpath))
                 if size!=new_size:

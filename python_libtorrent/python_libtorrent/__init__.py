@@ -89,10 +89,9 @@ if __settings__.getSetting('plugin_name')!=__plugin__:
 log('platform: ' + str(platform))
 if platform['system'] not in ['windows']:
     log('os: '+str(os.uname()))
-    if sys.maxunicode > 65536:
-        log('ucs4')
-    else:
-        log('ucs2')
+    log_text = 'ucs4' if sys.maxunicode > 65536 else 'ucs2'
+    log_text += ' x64' if sys.maxint > 2147483647 else ' x86'
+    log(log_text)
 
 try:
     if platform['system'] in ['linux_x86', 'windows', 'linux_armv6', 'linux_armv7',
