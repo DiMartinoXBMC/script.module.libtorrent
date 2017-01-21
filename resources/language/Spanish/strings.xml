@@ -35,7 +35,7 @@
 	<string id="1010">¡El motor TS no está ejecutándose!</string>
 	<string id="1011">No se obtuvo respuesta</string>
 	<string id="1012">Error de carga de torrent</string>
-	<string id="1013">Se terminó el tiempo</string>
+	<string id="1013">Se agotó el tiempo</string>
     
 	<string id="2000">Dirección del servidor</string>
 	<string id="2001">Pausa automática</string>
