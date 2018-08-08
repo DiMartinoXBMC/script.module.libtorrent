@@ -126,10 +126,8 @@ def get_platform():
             if "arm" in uname:
                 if "armv7" in uname:
                     ret["arch"] = "armv7"
-                elif "armv6" in uname:
-                    ret["arch"] = "armv6"
                 else:
-                    ret["arch"] = "arm"
+                    ret["arch"] = "armv6"
             elif "mips" in uname:
                 if sys.maxunicode > 65536:
                     ret["arch"] = 'mipsel_ucs4'
