@@ -1,4 +1,7 @@
-﻿1.1.1:
+﻿1.1.7:
+Added 1.1.6 and 1.1.7 for ARM v6 by Allin
+
+1.1.1:
 Added 1.1.1 for Windows by Roman_V_M
 Added 1.1.1 for iOS by HAL9000
 Added 1.1.1 for Android, Mac by srg70

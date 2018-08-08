@@ -46,8 +46,8 @@ else:
 
 log('dirname:' +str(dirname))
 
-versions = ['0.16.19', '1.0.6', '1.0.7', '1.0.8', '1.0.9', '1.1.0', '1.1.1', '1.0.11']
-default_path = versions[-2]
+versions = ['0.16.19', '1.0.6', '1.0.7', '1.0.8', '1.0.9', '1.1.0', '1.1.1', '1.0.11', '1.1.6', '1.1.7']
+default_path = versions[-1]
 set_version = int(__settings__.getSetting('set_version'))
 if getSettingAsBool('custom_version'):
     log('set_version:' +str(set_version)+' '+versions[set_version])
